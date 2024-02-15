@@ -72,7 +72,7 @@ exports.autocomplete = function (request, response) {
 		response.json([]);
 		return;
 	}
-	ProductModel.find({name: {$regex: searchProduct, "$options": "-i"}},
+	ProductModel.find({ name: { $regex: searchProduct, "$options": "i" } },
 		function (err, allData) {
 			if (err) {
 				console.log(err);
@@ -93,7 +93,7 @@ exports.category = function (request, response) {
 	// 	response.json([]);
 	// 	return;
 	// }
-	ProductModel.find({category: {$regex: category, "$options": "-i"}},
+	ProductModel.find({ category: { $regex: category, "$options": "i" } },
 		function (err, allData) {
 			if (err) {
 				console.log(err);
@@ -113,7 +113,7 @@ exports.getById = function (request, response) {
 		function (err, product) {
 			if (err) {
 				console.log(err);
-				 response.status(400).json({success: false, error :'Sorry, error'});
+				response.status(400).json({ success: false, error: 'Sorry, error' });
 
 			}
 			response.json(product);
@@ -127,39 +127,63 @@ exports.seed = function (request, response) {
 	console.log("SEED");
 	let product1 = new ProductModel();
 	product1.type = 'forhome';
-	product1.category = ['Кардиотренажеры','Силовые тренажеры'];
-	product1.brand = {name:'Bowflex', image:"/storage/brands/bowflex.png"};
+	product1.category = ['Кардиотренажеры', 'Силовые тренажеры'];
+	product1.brand = { name: 'Bowflex', image: "/storage/brands/bowflex.png" };
 	product1.name = "Беговая дорожка CardioPower S20";
 	product1.availability = false;
-	product1.slider =[
-		{id: "s"+ uuid.v4(),
-		image: "/storage/presentation/slider-first.jpg"},
-		{id: "s"+ uuid.v4(),
-		image: "/storage/presentation/slider-second.jpg"},
-		{id: "s"+ uuid.v4(),
-		image: "/storage/presentation/slider-first.jpg"},
-		{id: "s"+ uuid.v4(),
-		image: "/storage/presentation/slider-second.jpg"},
+	product1.slider = [
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-first.jpg"
+		},
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-second.jpg"
+		},
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-first.jpg"
+		},
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-second.jpg"
+		},
 	]
 	product1.gallery = [
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/second.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/first.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/third.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/fourth.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/first.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/second.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/third.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/fourth.png"}];
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/second.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/first.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/third.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/fourth.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/first.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/second.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/third.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/fourth.png"
+		}];
 	product1.rating = 5;
-	product1.price = {fullPrice: "1 134 999 ", sharePrice: "999 999 "};
+	product1.price = { fullPrice: "1 134 999 ", sharePrice: "999 999 " };
 	product1.configuration = {
 		size: "1500x2000",
 		weight: "150",
@@ -172,22 +196,22 @@ exports.seed = function (request, response) {
 			name: "Основные характеристики",
 			list: [
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Тип дорожки:",
 					value: "Домашняя"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Мощность двигателя:",
 					value: "2,0 л.с."
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Тип двигателя:",
 					value: "DC"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Регулировка скорости:",
 					value: "0,8-14 км/ч"
 				},
@@ -197,12 +221,12 @@ exports.seed = function (request, response) {
 			name: "Мультимедиа",
 			list: [
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Аудиосистема MP3:",
 					value: "есть"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Консоль:",
 					value: "LCD 7 дюймовый дисплей"
 				},
@@ -212,12 +236,12 @@ exports.seed = function (request, response) {
 			name: "Дополнительные характеристики",
 			list: [
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Беговое полотно:",
 					value: "2-х слойное"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Беговое полотно (ДхШ):",
 					value: "1200 х 450 мм"
 				},
@@ -226,12 +250,12 @@ exports.seed = function (request, response) {
 	};
 	product1.presentation = [
 		{
-			id: "p"+ uuid.v4(),
+			id: "p" + uuid.v4(),
 			image: "/storage/presentation/presentation-first.png",
-			value:"Беговые дорожки Bowflex Results Series ™ это самые совершенные технологии, высочайшее качество и полноценная синхронизация данных."
+			value: "Беговые дорожки Bowflex Results Series ™ это самые совершенные технологии, высочайшее качество и полноценная синхронизация данных."
 		},
 		{
-			id: "p"+ uuid.v4(),
+			id: "p" + uuid.v4(),
 			name: "Современные технологии",
 			image: "/storage/presentation/presentation-second.jpg",
 			value: "<p>Беговая дорожка Bowlfex BXT128 – это одна из самых технологичных моделей для максимально эффективных и комфортных тренировок.</p>" +
@@ -242,7 +266,7 @@ exports.seed = function (request, response) {
 				"51x152 см и инновационной системой амортизации Comfort Tech 3 Теперь каждый шаг идеально сглаживается, создавая ощущения пробежки на профессиональном покрытии!</p>"
 		},
 		{
-			id: "p"+ uuid.v4(),
+			id: "p" + uuid.v4(),
 			name: "Мультимедия",
 			image: "/storage/presentation/presentation-third.jpg",
 			value: "<p>На поручнях с мягким полиуретановым покрытием размещены кнопки регулировки наклона и скорости. Менять тренировочные режимы стало еще проще и удобнее!</p>" +
@@ -254,39 +278,63 @@ exports.seed = function (request, response) {
 
 	let product2 = new ProductModel();
 	product2.type = 'forclub';
-	product2.category = ['Кардиотренажеры','Силовые тренажеры'];
-	product2.brand = {name:'Boxingbar', image:"/storage/brands/boxingbar.png"};
+	product2.category = ['Кардиотренажеры', 'Силовые тренажеры'];
+	product2.brand = { name: 'Boxingbar', image: "/storage/brands/boxingbar.png" };
 	product2.name = "Беговая дорожка CardioPower S10";
 	product2.availability = true;
-	product2.slider =[
-		{id: "s"+ uuid.v4(),
-			image: "/storage/presentation/slider-first.jpg"},
-		{id: "s"+ uuid.v4(),
-			image: "/storage/presentation/slider-second.jpg"},
-		{id: "s"+ uuid.v4(),
-			image: "/storage/presentation/slider-first.jpg"},
-		{id: "s"+ uuid.v4(),
-			image: "/storage/presentation/slider-second.jpg"},
+	product2.slider = [
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-first.jpg"
+		},
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-second.jpg"
+		},
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-first.jpg"
+		},
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-second.jpg"
+		},
 	];
 	product2.gallery = [
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/first.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/second.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/third.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/fourth.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/first.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/second.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/third.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/fourth.png"}];
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/first.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/second.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/third.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/fourth.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/first.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/second.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/third.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/fourth.png"
+		}];
 	product2.rating = 5;
-	product2.price = {fullPrice: "1 134 999 ", sharePrice: null};
+	product2.price = { fullPrice: "1 134 999 ", sharePrice: null };
 	product2.configuration = {
 		size: "1700x2000",
 		weight: "500",
@@ -299,22 +347,22 @@ exports.seed = function (request, response) {
 			name: "Основные характеристики",
 			list: [
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Тип дорожки:",
 					value: "Домашняя"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Мощность двигателя:",
 					value: "2,0 л.с."
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Тип двигателя:",
 					value: "DC"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Регулировка скорости:",
 					value: "0,8-14 км/ч"
 				},
@@ -324,12 +372,12 @@ exports.seed = function (request, response) {
 			name: "Мультимедиа",
 			list: [
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Аудиосистема MP3:",
 					value: "есть"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Консоль:",
 					value: "LCD 7 дюймовый дисплей"
 				},
@@ -339,12 +387,12 @@ exports.seed = function (request, response) {
 			name: "Дополнительные характеристики",
 			list: [
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Беговое полотно:",
 					value: "2-х слойное"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Беговое полотно (ДхШ):",
 					value: "1200 х 450 мм"
 				},
@@ -353,12 +401,12 @@ exports.seed = function (request, response) {
 	};
 	product2.presentation = [
 		{
-			id: "p"+ uuid.v4(),
+			id: "p" + uuid.v4(),
 			image: "/storage/presentation/presentation-first.png",
-			value:"Беговые дорожки Bowflex Results Series ™ это самые совершенные технологии, высочайшее качество и полноценная синхронизация данных."
+			value: "Беговые дорожки Bowflex Results Series ™ это самые совершенные технологии, высочайшее качество и полноценная синхронизация данных."
 		},
 		{
-			id: "p"+ uuid.v4(),
+			id: "p" + uuid.v4(),
 			name: "Современные технологии",
 			image: "/storage/presentation/presentation-second.jpg",
 			value: "<p>Беговая дорожка Bowlfex BXT128 – это одна из самых технологичных моделей для максимально эффективных и комфортных тренировок.</p>" +
@@ -369,7 +417,7 @@ exports.seed = function (request, response) {
 				"51x152 см и инновационной системой амортизации Comfort Tech 3 Теперь каждый шаг идеально сглаживается, создавая ощущения пробежки на профессиональном покрытии!</p>"
 		},
 		{
-			id: "p"+ uuid.v4(),
+			id: "p" + uuid.v4(),
 			name: "Мультимедия",
 			image: "/storage/presentation/presentation-third.jpg",
 			value: "<p>На поручнях с мягким полиуретановым покрытием размещены кнопки регулировки наклона и скорости. Менять тренировочные режимы стало еще проще и удобнее!</p>" +
@@ -381,39 +429,63 @@ exports.seed = function (request, response) {
 
 	let product3 = new ProductModel();
 	product3.type = 'forhome';
-	product3.category=['Силовые тренажеры','Свободные веса'];
-	product3.brand = {name:'Cardiopower', image:"/storage/brands/cardiopower.png"};
+	product3.category = ['Силовые тренажеры', 'Свободные веса'];
+	product3.brand = { name: 'Cardiopower', image: "/storage/brands/cardiopower.png" };
 	product3.name = "Беговая дорожка CardioPower S35";
 	product3.availability = false;
-	product3.slider =[
-		{id: "s"+ uuid.v4(),
-			image: "/storage/presentation/slider-first.jpg"},
-		{id: "s"+ uuid.v4(),
-			image: "/storage/presentation/slider-second.jpg"},
-		{id: "s"+ uuid.v4(),
-			image: "/storage/presentation/slider-first.jpg"},
-		{id: "s"+ uuid.v4(),
-			image: "/storage/presentation/slider-second.jpg"},
+	product3.slider = [
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-first.jpg"
+		},
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-second.jpg"
+		},
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-first.jpg"
+		},
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-second.jpg"
+		},
 	];
 	product3.gallery = [
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/third.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/second.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/first.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/fourth.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/first.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/second.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/third.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/fourth.png"}];
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/third.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/second.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/first.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/fourth.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/first.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/second.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/third.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/fourth.png"
+		}];
 	product3.rating = 5;
-	product3.price = {fullPrice: "1 199 999 ", sharePrice: "1 099 199"};
+	product3.price = { fullPrice: "1 199 999 ", sharePrice: "1 099 199" };
 	product3.configuration = {
 		size: "1900x2000",
 		weight: "800",
@@ -426,22 +498,22 @@ exports.seed = function (request, response) {
 			name: "Основные характеристики",
 			list: [
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Тип дорожки:",
 					value: "Домашняя"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Мощность двигателя:",
 					value: "2,0 л.с."
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Тип двигателя:",
 					value: "DC"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Регулировка скорости:",
 					value: "0,8-14 км/ч"
 				},
@@ -451,12 +523,12 @@ exports.seed = function (request, response) {
 			name: "Мультимедиа",
 			list: [
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Аудиосистема MP3:",
 					value: "есть"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Консоль:",
 					value: "LCD 7 дюймовый дисплей"
 				},
@@ -466,12 +538,12 @@ exports.seed = function (request, response) {
 			name: "Дополнительные характеристики",
 			list: [
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Беговое полотно:",
 					value: "2-х слойное"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Беговое полотно (ДхШ):",
 					value: "1200 х 450 мм"
 				},
@@ -480,12 +552,12 @@ exports.seed = function (request, response) {
 	};
 	product3.presentation = [
 		{
-			id: "p"+ uuid.v4(),
+			id: "p" + uuid.v4(),
 			image: "/storage/presentation/presentation-first.png",
-			value:"Беговые дорожки Bowflex Results Series ™ это самые совершенные технологии, высочайшее качество и полноценная синхронизация данных."
+			value: "Беговые дорожки Bowflex Results Series ™ это самые совершенные технологии, высочайшее качество и полноценная синхронизация данных."
 		},
 		{
-			id: "p"+ uuid.v4(),
+			id: "p" + uuid.v4(),
 			name: "Современные технологии",
 			image: "/storage/presentation/presentation-second.jpg",
 			value: "<p>Беговая дорожка Bowlfex BXT128 – это одна из самых технологичных моделей для максимально эффективных и комфортных тренировок.</p>" +
@@ -496,7 +568,7 @@ exports.seed = function (request, response) {
 				"51x152 см и инновационной системой амортизации Comfort Tech 3 Теперь каждый шаг идеально сглаживается, создавая ощущения пробежки на профессиональном покрытии!</p>"
 		},
 		{
-			id: "p"+ uuid.v4(),
+			id: "p" + uuid.v4(),
 			name: "Мультимедия",
 			image: "/storage/presentation/presentation-third.jpg",
 			value: "<p>На поручнях с мягким полиуретановым покрытием размещены кнопки регулировки наклона и скорости. Менять тренировочные режимы стало еще проще и удобнее!</p>" +
@@ -508,39 +580,63 @@ exports.seed = function (request, response) {
 
 	let product4 = new ProductModel();
 	product4.type = 'forhome';
-	product4.category = ['Уличные виды спорта','Силовые тренажеры'];
-	product4.brand = {name:'Doublefish', image:"/storage/brands/doublefish.png"};
+	product4.category = ['Уличные виды спорта', 'Силовые тренажеры'];
+	product4.brand = { name: 'Doublefish', image: "/storage/brands/doublefish.png" };
 	product4.name = "Беговая дорожка CardioPower S01";
 	product4.availability = true;
-	product4.slider =[
-		{id: "s"+ uuid.v4(),
-			image: "/storage/presentation/slider-first.jpg"},
-		{id: "s"+ uuid.v4(),
-			image: "/storage/presentation/slider-second.jpg"},
-		{id: "s"+ uuid.v4(),
-			image: "/storage/presentation/slider-first.jpg"},
-		{id: "s"+ uuid.v4(),
-			image: "/storage/presentation/slider-second.jpg"},
+	product4.slider = [
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-first.jpg"
+		},
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-second.jpg"
+		},
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-first.jpg"
+		},
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-second.jpg"
+		},
 	];
 	product4.gallery = [
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/fourth.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/second.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/third.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/fourth.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/first.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/second.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/third.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/fourth.png"}];
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/fourth.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/second.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/third.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/fourth.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/first.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/second.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/third.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/fourth.png"
+		}];
 	product4.rating = 5;
-	product4.price = {fullPrice: "1 049 999 ", sharePrice: "849 999"};
+	product4.price = { fullPrice: "1 049 999 ", sharePrice: "849 999" };
 	product4.configuration = {
 		size: "1500x2000",
 		weight: "500",
@@ -553,22 +649,22 @@ exports.seed = function (request, response) {
 			name: "Основные характеристики",
 			list: [
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Тип дорожки:",
 					value: "Домашняя"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Мощность двигателя:",
 					value: "2,0 л.с."
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Тип двигателя:",
 					value: "DC"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Регулировка скорости:",
 					value: "0,8-14 км/ч"
 				},
@@ -578,12 +674,12 @@ exports.seed = function (request, response) {
 			name: "Мультимедиа",
 			list: [
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Аудиосистема MP3:",
 					value: "есть"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Консоль:",
 					value: "LCD 7 дюймовый дисплей"
 				},
@@ -593,12 +689,12 @@ exports.seed = function (request, response) {
 			name: "Дополнительные характеристики",
 			list: [
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Беговое полотно:",
 					value: "2-х слойное"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Беговое полотно (ДхШ):",
 					value: "1200 х 450 мм"
 				},
@@ -607,12 +703,12 @@ exports.seed = function (request, response) {
 	};
 	product4.presentation = [
 		{
-			id: "p"+ uuid.v4(),
+			id: "p" + uuid.v4(),
 			image: "/storage/presentation/presentation-first.png",
-			value:"Беговые дорожки Bowflex Results Series ™ это самые совершенные технологии, высочайшее качество и полноценная синхронизация данных."
+			value: "Беговые дорожки Bowflex Results Series ™ это самые совершенные технологии, высочайшее качество и полноценная синхронизация данных."
 		},
 		{
-			id: "p"+ uuid.v4(),
+			id: "p" + uuid.v4(),
 			name: "Современные технологии",
 			image: "/storage/presentation/presentation-second.jpg",
 			value: "<p>Беговая дорожка Bowlfex BXT128 – это одна из самых технологичных моделей для максимально эффективных и комфортных тренировок.</p>" +
@@ -623,7 +719,7 @@ exports.seed = function (request, response) {
 				"51x152 см и инновационной системой амортизации Comfort Tech 3 Теперь каждый шаг идеально сглаживается, создавая ощущения пробежки на профессиональном покрытии!</p>"
 		},
 		{
-			id: "p"+ uuid.v4(),
+			id: "p" + uuid.v4(),
 			name: "Мультимедия",
 			image: "/storage/presentation/presentation-third.jpg",
 			value: "<p>На поручнях с мягким полиуретановым покрытием размещены кнопки регулировки наклона и скорости. Менять тренировочные режимы стало еще проще и удобнее!</p>" +
@@ -636,38 +732,62 @@ exports.seed = function (request, response) {
 	let product5 = new ProductModel();
 	product5.type = 'forclub';
 	product5.category = ['Силовые тренажеры'];
-	product5.brand = {name:'Doublefish', image:"/storage/brands/doublefish.png"};
+	product5.brand = { name: 'Doublefish', image: "/storage/brands/doublefish.png" };
 	product5.name = "Беговая дорожка CardioPower S30";
 	product5.availability = true;
-	product5.slider =[
-		{id: "s"+ uuid.v4(),
-			image: "/storage/presentation/slider-first.jpg"},
-		{id: "s"+ uuid.v4(),
-			image: "/storage/presentation/slider-second.jpg"},
-		{id: "s"+ uuid.v4(),
-			image: "/storage/presentation/slider-first.jpg"},
-		{id: "s"+ uuid.v4(),
-			image: "/storage/presentation/slider-second.jpg"},
+	product5.slider = [
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-first.jpg"
+		},
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-second.jpg"
+		},
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-first.jpg"
+		},
+		{
+			id: "s" + uuid.v4(),
+			image: "/storage/presentation/slider-second.jpg"
+		},
 	];
 	product5.gallery = [
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/fourth.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/second.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/third.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/fourth.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/first.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/second.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/third.png"},
-		{id: "a"+ uuid.v4(),
-			image: "/storage/products/fourth.png"}];
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/fourth.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/second.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/third.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/fourth.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/first.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/second.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/third.png"
+		},
+		{
+			id: "a" + uuid.v4(),
+			image: "/storage/products/fourth.png"
+		}];
 	product5.rating = 5;
-	product5.price = {fullPrice: "1 049 999 ", sharePrice: "849 999"};
+	product5.price = { fullPrice: "1 049 999 ", sharePrice: "849 999" };
 	product5.configuration = {
 		size: "1500x2000",
 		weight: "500",
@@ -680,22 +800,22 @@ exports.seed = function (request, response) {
 			name: "Основные характеристики",
 			list: [
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Тип дорожки:",
 					value: "Домашняя"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Мощность двигателя:",
 					value: "2,0 л.с."
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Тип двигателя:",
 					value: "DC"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Регулировка скорости:",
 					value: "0,8-14 км/ч"
 				},
@@ -705,12 +825,12 @@ exports.seed = function (request, response) {
 			name: "Мультимедиа",
 			list: [
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Аудиосистема MP3:",
 					value: "есть"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Консоль:",
 					value: "LCD 7 дюймовый дисплей"
 				},
@@ -720,12 +840,12 @@ exports.seed = function (request, response) {
 			name: "Дополнительные характеристики",
 			list: [
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Беговое полотно:",
 					value: "2-х слойное"
 				},
 				{
-					id: "ad"+uuid.v4(),
+					id: "ad" + uuid.v4(),
 					name: "Беговое полотно (ДхШ):",
 					value: "1200 х 450 мм"
 				},
@@ -734,12 +854,12 @@ exports.seed = function (request, response) {
 	};
 	product5.presentation = [
 		{
-			id: "p"+ uuid.v4(),
+			id: "p" + uuid.v4(),
 			image: "/storage/presentation/presentation-first.png",
-			value:"Беговые дорожки Bowflex Results Series ™ это самые совершенные технологии, высочайшее качество и полноценная синхронизация данных."
+			value: "Беговые дорожки Bowflex Results Series ™ это самые совершенные технологии, высочайшее качество и полноценная синхронизация данных."
 		},
 		{
-			id: "p"+ uuid.v4(),
+			id: "p" + uuid.v4(),
 			name: "Современные технологии",
 			image: "/storage/presentation/presentation-second.jpg",
 			value: "<p>Беговая дорожка Bowlfex BXT128 – это одна из самых технологичных моделей для максимально эффективных и комфортных тренировок.</p>" +
@@ -750,7 +870,7 @@ exports.seed = function (request, response) {
 				"51x152 см и инновационной системой амортизации Comfort Tech 3 Теперь каждый шаг идеально сглаживается, создавая ощущения пробежки на профессиональном покрытии!</p>"
 		},
 		{
-			id: "p"+ uuid.v4(),
+			id: "p" + uuid.v4(),
 			name: "Мультимедия",
 			image: "/storage/presentation/presentation-third.jpg",
 			value: "<p>На поручнях с мягким полиуретановым покрытием размещены кнопки регулировки наклона и скорости. Менять тренировочные режимы стало еще проще и удобнее!</p>" +
