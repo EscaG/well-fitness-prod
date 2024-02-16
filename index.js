@@ -12,7 +12,6 @@ const path = require('path');
 const multer = require('multer');
 // var logger = require('morgan');
 const errorMiddleware = require('./middlewares/error-middleware');
-const clientPromise = require('./lib/mongodb');
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -40,10 +39,9 @@ if (process.env.NODE_ENV === 'production') {
 	});
 }
 
-const DB_URI = process.env.MONGODB_URI || process.env.DB_URI;
+const DB_URI = process.env.MONGODB_URI;
 const start = async () => {
 	try {
-		await clientPromise;
 		await mongoose.connect(DB_URI, {
 			useNewUrlParser: true, useUnifiedTopology: true
 		})
