@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === 'production') {
 	});
 }
 
-const DB_URI = process.env.MONGODB_URI;
+const DB_URI = process.env.DB_URI;
 const start = async () => {
 	try {
 		await mongoose.connect(DB_URI, {
