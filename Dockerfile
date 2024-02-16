@@ -7,6 +7,6 @@ COPY . /well-fitness
 # Install the application dependencies
 RUN npm install
 # Expose port 8000
-EXPOSE 8080
+EXPOSE 8000
 # Define the entry point for the container
 CMD ["npm", "start"]
