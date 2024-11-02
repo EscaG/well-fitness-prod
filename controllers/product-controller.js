@@ -2,6 +2,10 @@ const ProductModel = require("../models/product-model");
 const FileController = require("./fileController");
 const uuid = require('uuid');
 
+
+// ProductModel.createIndexes({category: "text", presentation: "text", "brand.name": "text"})
+//     .then(res => console.log(res));
+
 // Create => POST
 exports.post = function (request, response) {
 	console.log("Run POST");
@@ -72,7 +76,18 @@ exports.autocomplete = function (request, response) {
 		response.json([]);
 		return;
 	}
-	ProductModel.find({ name: { $regex: searchProduct, "$options": "i" } },
+	// Поиска по части слова в заданных полях
+	ProductModel.find({
+			$or: [
+				{category: {$regex: searchProduct, $options: "i"}},
+				{
+					presentation: {
+						$elemMatch: {value: {$regex: searchProduct, $options: "i"}}
+					}
+				},
+				{"brand.name": {$regex: searchProduct, $options: "i"}}
+			]
+		},
 		function (err, allData) {
 			if (err) {
 				console.log(err);
@@ -89,11 +104,9 @@ exports.category = function (request, response) {
 	const category = request.query.category;
 	// /api/product?category=Samsung
 	console.log("category: " + category);
-	// if (category.length < 2) {
-	// 	response.json([]);
-	// 	return;
-	// }
-	ProductModel.find({ category: { $regex: category, "$options": "i" } },
+
+	// Поиск только в категориях
+	ProductModel.find({category: {$regex: category, $options: "i"}},
 		function (err, allData) {
 			if (err) {
 				console.log(err);
@@ -113,7 +126,7 @@ exports.getById = function (request, response) {
 		function (err, product) {
 			if (err) {
 				console.log(err);
-				response.status(400).json({ success: false, error: 'Sorry, error' });
+				response.status(400).json({success: false, error: 'Sorry, error'});
 
 			}
 			response.json(product);
@@ -122,13 +135,12 @@ exports.getById = function (request, response) {
 }
 
 
-
 exports.seed = function (request, response) {
 	console.log("SEED");
 	let product1 = new ProductModel();
 	product1.type = 'forhome';
 	product1.category = ['Кардиотренажеры', 'Силовые тренажеры'];
-	product1.brand = { name: 'Bowflex', image: "/storage/brands/bowflex.png" };
+	product1.brand = {name: 'Bowflex', image: "/storage/brands/bowflex.png"};
 	product1.name = "Беговая дорожка CardioPower S20";
 	product1.availability = false;
 	product1.slider = [
@@ -183,7 +195,7 @@ exports.seed = function (request, response) {
 			image: "/storage/products/fourth.png"
 		}];
 	product1.rating = 5;
-	product1.price = { fullPrice: "1 134 999 ", sharePrice: "999 999 " };
+	product1.price = {fullPrice: "1 134 999 ", sharePrice: "999 999 "};
 	product1.configuration = {
 		size: "1500x2000",
 		weight: "150",
@@ -279,7 +291,7 @@ exports.seed = function (request, response) {
 	let product2 = new ProductModel();
 	product2.type = 'forclub';
 	product2.category = ['Кардиотренажеры', 'Силовые тренажеры'];
-	product2.brand = { name: 'Boxingbar', image: "/storage/brands/boxingbar.png" };
+	product2.brand = {name: 'Boxingbar', image: "/storage/brands/boxingbar.png"};
 	product2.name = "Беговая дорожка CardioPower S10";
 	product2.availability = true;
 	product2.slider = [
@@ -334,7 +346,7 @@ exports.seed = function (request, response) {
 			image: "/storage/products/fourth.png"
 		}];
 	product2.rating = 5;
-	product2.price = { fullPrice: "1 134 999 ", sharePrice: null };
+	product2.price = {fullPrice: "1 134 999 ", sharePrice: null};
 	product2.configuration = {
 		size: "1700x2000",
 		weight: "500",
@@ -430,7 +442,7 @@ exports.seed = function (request, response) {
 	let product3 = new ProductModel();
 	product3.type = 'forhome';
 	product3.category = ['Силовые тренажеры', 'Свободные веса'];
-	product3.brand = { name: 'Cardiopower', image: "/storage/brands/cardiopower.png" };
+	product3.brand = {name: 'Cardiopower', image: "/storage/brands/cardiopower.png"};
 	product3.name = "Беговая дорожка CardioPower S35";
 	product3.availability = false;
 	product3.slider = [
@@ -485,7 +497,7 @@ exports.seed = function (request, response) {
 			image: "/storage/products/fourth.png"
 		}];
 	product3.rating = 5;
-	product3.price = { fullPrice: "1 199 999 ", sharePrice: "1 099 199" };
+	product3.price = {fullPrice: "1 199 999 ", sharePrice: "1 099 199"};
 	product3.configuration = {
 		size: "1900x2000",
 		weight: "800",
@@ -581,7 +593,7 @@ exports.seed = function (request, response) {
 	let product4 = new ProductModel();
 	product4.type = 'forhome';
 	product4.category = ['Уличные виды спорта', 'Силовые тренажеры'];
-	product4.brand = { name: 'Doublefish', image: "/storage/brands/doublefish.png" };
+	product4.brand = {name: 'Doublefish', image: "/storage/brands/doublefish.png"};
 	product4.name = "Беговая дорожка CardioPower S01";
 	product4.availability = true;
 	product4.slider = [
@@ -636,7 +648,7 @@ exports.seed = function (request, response) {
 			image: "/storage/products/fourth.png"
 		}];
 	product4.rating = 5;
-	product4.price = { fullPrice: "1 049 999 ", sharePrice: "849 999" };
+	product4.price = {fullPrice: "1 049 999 ", sharePrice: "849 999"};
 	product4.configuration = {
 		size: "1500x2000",
 		weight: "500",
@@ -732,7 +744,7 @@ exports.seed = function (request, response) {
 	let product5 = new ProductModel();
 	product5.type = 'forclub';
 	product5.category = ['Силовые тренажеры'];
-	product5.brand = { name: 'Doublefish', image: "/storage/brands/doublefish.png" };
+	product5.brand = {name: 'Doublefish', image: "/storage/brands/doublefish.png"};
 	product5.name = "Беговая дорожка CardioPower S30";
 	product5.availability = true;
 	product5.slider = [
@@ -787,7 +799,7 @@ exports.seed = function (request, response) {
 			image: "/storage/products/fourth.png"
 		}];
 	product5.rating = 5;
-	product5.price = { fullPrice: "1 049 999 ", sharePrice: "849 999" };
+	product5.price = {fullPrice: "1 049 999 ", sharePrice: "849 999"};
 	product5.configuration = {
 		size: "1500x2000",
 		weight: "500",
